@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <assert.h>
 
+#define SW_TEST_ENVIRONMENT 0
+#define SW_PROD_ENVIRONMENT 1
+
+#define SW_ENVIRONMENT SW_TEST_ENVIRONMENT
+
 int alertFailureCount = 0;
 
 int networkAlertStub(float celcius) {
@@ -24,10 +29,12 @@ void alertInCelcius(float farenheit) {
 }
 
 int main() {
+    #if (SW_ENVIRONMENT == SW_TEST_ENVIRONMENT)
     alertInCelcius(400.5);
     alertInCelcius(303.6);
     alertInCelcius(950);
     assert(alertFailureCount == 1);
+    #endif
     printf("%d alerts failed.\n", alertFailureCount);
     printf("All is well (maybe!)\n");
     return 0;
