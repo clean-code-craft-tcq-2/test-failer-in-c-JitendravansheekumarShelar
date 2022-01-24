@@ -1,13 +1,27 @@
 #include <stdio.h>
 #include <assert.h>
 
+#define Max_Major_Color_Count 5U
+#define Max_Minor_Color_Count 5U
+
+void printOnConsole(int pairNumber , const char* majorColor , const char* minorColor)
+{
+    const char* testMajorColor[] = {"White", "Red", "Black", "Yellow", "Violet"};
+    const char* testMinorColor[] = {"Blue", "Orange", "Green", "Brown", "Slate"};
+    
+    assert( testMajorColor[pairNumber / Max_Major_Color_Count] == majorColor);
+    assert( testMinorColor[pairNumber % Max_Minor_Color_Count] == minorColor);
+     
+    printf("%d | %s | %s\n", pairNumber , majorColor, minorColor);
+}
+
 int printColorMap() {
     const char* majorColor[] = {"White", "Red", "Black", "Yellow", "Violet"};
     const char* minorColor[] = {"Blue", "Orange", "Green", "Brown", "Slate"};
     int i = 0, j = 0;
     for(i = 0; i < 5; i++) {
         for(j = 0; j < 5; j++) {
-            printf("%d | %s | %s\n", i * 5 + j, majorColor[i], minorColor[i]);
+            printOnConsole(i * 5 + j, majorColor[i], minorColor[i]);
         }
     }
     return i * j;
@@ -15,7 +29,7 @@ int printColorMap() {
 
 int main() {
     int result = printColorMap();
-    assert(result == 24);
+    assert(result == 25);
     printf("All is well (maybe!)\n");
     return 0;
 }
