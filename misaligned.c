@@ -1,16 +1,15 @@
 #include <stdio.h>
 #include <assert.h>
 
-#define Max_Major_Color_Count 5U
-#define Max_Minor_Color_Count 5U
+#define Max_CountInEachColorTable 5U
 
 void printOnConsole(int pairNumber , const char* majorColor , const char* minorColor)
 {
     const char* testMajorColor[] = {"White", "Red", "Black", "Yellow", "Violet"};
     const char* testMinorColor[] = {"Blue", "Orange", "Green", "Brown", "Slate"};
     
-    assert( testMajorColor[pairNumber / Max_Major_Color_Count] == majorColor);
-    assert( testMinorColor[pairNumber % Max_Minor_Color_Count] == minorColor);
+    assert( testMajorColor[pairNumber / Max_CountInEachColorTable] == majorColor);
+    assert( testMinorColor[pairNumber % Max_CountInEachColorTable] == minorColor);
      
     printf("%d | %s | %s\n", pairNumber , majorColor, minorColor);
 }
