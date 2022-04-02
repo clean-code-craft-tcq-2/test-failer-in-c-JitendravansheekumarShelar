@@ -6,7 +6,10 @@
 
 #define SW_ENVIRONMENT SW_TEST_ENVIRONMENT
 
-void testsize(int cms, char testsizeName) {
+void testSelectSize(int cms, char testsizeName);
+void selectSize(int cms , char testsizeName);
+
+void testSelectSize(int cms, char testsizeName) {
     char sizeName = '\0';
     if(cms <= 38) {
         sizeName = 'S';
@@ -18,7 +21,7 @@ void testsize(int cms, char testsizeName) {
     assert ( sizeName == testsizeName);
 }
 
-void size(int cms , char testsizeName) {
+void selectSize(int cms , char testsizeName) {
     char sizeName = '\0';
     if(cms <= 38) {
         sizeName = 'S';
@@ -32,9 +35,9 @@ void size(int cms , char testsizeName) {
 
 int main() {
     #if (SW_ENVIRONMENT == SW_TEST_ENVIRONMENT)
-    char (*fp_charSize)(int,char) = &testsize;
+    char (*fp_charSize)(int,char) = &testSelectSize;
     #else
-    char (*fp_charSize)(int,char) = &size;
+    char (*fp_charSize)(int,char) = &selectSize;
     #endif
 
     fp_charSize(37,'S');
