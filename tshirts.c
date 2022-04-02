@@ -37,7 +37,6 @@ char selectSize(int cms , char testsizeName) {
 }
 
 int main() {
-    char ch;
     #if (SW_ENVIRONMENT == SW_TEST_ENVIRONMENT)
     char (*fp_charSize)(int,char) = &testSelectSize;
     #else
