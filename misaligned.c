@@ -22,14 +22,15 @@ int testprintColorMap() {
     const char* majorColor[] = {"White", "Red", "Black", "Yellow", "Violet"};
     const char* minorColor[] = {"Blue", "Orange", "Green", "Brown", "Slate"};
     
-    int i = 0, j = 0;
+    int i = 0, j = 0,k = 0;
     for(i = 0; i < 5; i++) {
         for(j = 0; j < 5; j++) {
             testprintOnConsole(i * 5 + j, majorColor[i], minorColor[j]);
+            k++;
         }
     }
-    assert((i * j) == 25);
-    return i * j;
+    assert(k == 25);
+    return k;
 }
 
 void printOnConsole(int pairNumber , const char* majorColor , const char* minorColor)
@@ -40,13 +41,14 @@ void printOnConsole(int pairNumber , const char* majorColor , const char* minorC
 int printColorMap() {
     const char* majorColor[] = {"White", "Red", "Black", "Yellow", "Violet"};
     const char* minorColor[] = {"Blue", "Orange", "Green", "Brown", "Slate"};
-    int i = 0, j = 0;
+    int i = 0, j = 0, k = 0;
     for(i = 0; i < 5; i++) {
         for(j = 0; j < 5; j++) {
             printOnConsole(i * 5 + j, majorColor[i], minorColor[j]);
+            k++;
         }
     }
-    return i * j;
+    return k;
 }
 
 int main() {
