@@ -44,10 +44,10 @@ int main() {
     #endif
 
     (void)fp_charSize(37,'S');
-    (void)fp_charSize(40,'M');
-    (void)fp_charSize(43,'L');
-    (void)fp_charSize(42,'L');
+    (void)fp_charSize(40,'L');
+    (void)fp_charSize(43,'M');
     (void)fp_charSize(38,'S');
+    (void)fp_charSize(42,'L');
     
     printf("All is well (maybe!)\n");
     return 0;
