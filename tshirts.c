@@ -6,10 +6,10 @@
 
 #define SW_ENVIRONMENT SW_TEST_ENVIRONMENT
 
-void testSelectSize(int cms, char testsizeName);
-void selectSize(int cms , char testsizeName);
+char testSelectSize(int cms, char testsizeName);
+char selectSize(int cms , char testsizeName);
 
-void testSelectSize(int cms, char testsizeName) {
+char testSelectSize(int cms, char testsizeName) {
     char sizeName = '\0';
     if(cms <= 38) {
         sizeName = 'S';
@@ -19,9 +19,10 @@ void testSelectSize(int cms, char testsizeName) {
         sizeName = 'L';
     }
     assert ( sizeName == testsizeName);
+    return testsizeName;
 }
 
-void selectSize(int cms , char testsizeName) {
+char selectSize(int cms , char testsizeName) {
     char sizeName = '\0';
     if(cms <= 38) {
         sizeName = 'S';
@@ -30,21 +31,24 @@ void selectSize(int cms , char testsizeName) {
     } else if(cms >= 42) {
         sizeName = 'L';
     }
+    testsizeName = sizeName;
     
+    return testsizeName;
 }
 
 int main() {
+    char ch;
     #if (SW_ENVIRONMENT == SW_TEST_ENVIRONMENT)
-    void (*fp_charSize)(int,char) = &testSelectSize;
+    char (*fp_charSize)(int,char) = &testSelectSize;
     #else
-    void (*fp_charSize)(int,char) = &selectSize;
+    char (*fp_charSize)(int,char) = &selectSize;
     #endif
 
-    fp_charSize(37,'S');
-    fp_charSize(40,'M');
-    fp_charSize(43,'L');
-    fp_charSize(42,'L');
-    fp_charSize(38,'S');
+    (void)fp_charSize(37,'S');
+    (void)fp_charSize(40,'M');
+    (void)fp_charSize(43,'L');
+    (void)fp_charSize(42,'L');
+    (void)fp_charSize(38,'S');
     
     printf("All is well (maybe!)\n");
     return 0;
