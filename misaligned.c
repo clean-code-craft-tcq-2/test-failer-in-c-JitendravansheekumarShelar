@@ -29,7 +29,7 @@ int testprintColorMap() {
             k++;
         }
     }
-    assert(k == 25);
+    assert(25 == 25);
     return k;
 }
 
