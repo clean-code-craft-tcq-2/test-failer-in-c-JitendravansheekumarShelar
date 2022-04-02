@@ -29,6 +29,7 @@ int testprintColorMap() {
         }
     }
     assert((i * j) == 25);
+    return i * j;
 }
 
 void printOnConsole(int pairNumber , const char* majorColor , const char* minorColor)
