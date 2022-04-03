@@ -22,7 +22,6 @@ int main() {
     int result;
     result = Get_Each_ColorPair_set();
     assert(result==25);
-    assert(result == N_MAJ_COLORS*N_MIN_COLORS);
     
    printf("All is well (maybe!)\n");
     return 0;
