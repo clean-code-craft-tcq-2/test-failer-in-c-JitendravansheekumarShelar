@@ -1,22 +1,54 @@
 #include <stdio.h>
 #include <assert.h>
 
-char size(int cms) {
+#define SW_TEST_ENVIRONMENT 0
+#define SW_PROD_ENVIRONMENT 1
+
+#define SW_ENVIRONMENT SW_TEST_ENVIRONMENT
+
+char testSelectSize(int cms, char testsizeName);
+char selectSize(int cms , char testsizeName);
+
+char testSelectSize(int cms, char testsizeName) {
     char sizeName = '\0';
-    if(cms < 38) {
+    if(cms <= 38) {
         sizeName = 'S';
     } else if(cms > 38 && cms < 42) {
         sizeName = 'M';
-    } else if(cms > 42) {
+    } else if(cms >= 42) {
         sizeName = 'L';
     }
-    return sizeName;
+    assert ( sizeName == testsizeName);
+    return testsizeName;
+}
+
+char selectSize(int cms , char testsizeName) {
+    char sizeName = '\0';
+    if(cms <= 38) {
+        sizeName = 'S';
+    } else if(cms > 38 && cms < 42) {
+        sizeName = 'M';
+    } else if(cms >= 42) {
+        sizeName = 'L';
+    }
+    testsizeName = sizeName;
+    
+    return testsizeName;
 }
 
 int main() {
-    assert(size(37) == 'S');
-    assert(size(40) == 'M');
-    assert(size(43) == 'L');
+    #if (SW_ENVIRONMENT == SW_TEST_ENVIRONMENT)
+    char (*fp_charSize)(int,char) = &testSelectSize;
+    #else
+    char (*fp_charSize)(int,char) = &selectSize;
+    #endif
+
+    (void)fp_charSize(37,'S');
+    (void)fp_charSize(40,'L');
+    (void)fp_charSize(43,'M');
+    (void)fp_charSize(38,'S');
+    (void)fp_charSize(42,'L');
+    
     printf("All is well (maybe!)\n");
     return 0;
 }
