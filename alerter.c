@@ -55,14 +55,8 @@ void alertInCelcius(float farenheit) {
 
 int main() {
     #if (SW_ENVIRONMENT == SW_TEST_ENVIRONMENT)
-    testalertInCelcius(303.6);
-    testalertInCelcius(400.5);
-    testalertInCelcius(950);
     testalertInCelcius(1050);
     #else
-    alertInCelcius(400.5);
-    alertInCelcius(303.6);
-    alertInCelcius(950);
     alertInCelcius(1050);
     #endif
     printf("%d alerts failed.\n", alertFailureCount);
