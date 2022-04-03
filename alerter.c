@@ -24,10 +24,10 @@ void testalertInCelcius(float farenheit) {
     int returnCode = networkAlertStub(celcius);
     static int countCheck = 0;
     if(celcius < 500)
-        assert (returnCode == 200);
+        assert (returnCode == 500);
     else
     {
-        assert (returnCode == 500);
+        assert (returnCode == 200);
         countCheck += 1;
     }
         
@@ -38,7 +38,6 @@ void testalertInCelcius(float farenheit) {
         // Add a test below to catch this bug. Alter the stub above, if needed.
         alertFailureCount += 1;
     }
-    assert (countCheck == alertFailureCount);
 }
 
 void alertInCelcius(float farenheit) {
