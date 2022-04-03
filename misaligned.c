@@ -1,60 +1,51 @@
 #include <stdio.h>
 #include <assert.h>
 
-#define Max_CountInEachColorTable 5U
-#define SW_TEST_ENVIRONMENT 0
-#define SW_PROD_ENVIRONMENT 1
-
-#define SW_ENVIRONMENT SW_TEST_ENVIRONMENT
+const int N_MAJ_COLORS = 5;
+const int N_MIN_COLORS = 5;
 
 
-void testprintOnConsole(int pairNumber , const char* majorColor , const char* minorColor)
-{    
-    printf("%d \t| \t%s \t| \t%s\n", pairNumber , majorColor, minorColor);
-}
-
-int testprintColorMap() {
-
-    const char* majorColor[] = {"White", "Red", "Black", "Yellow", "Violet"};
-    const char* minorColor[] = {"Blue", "Orange", "Green", "Brown", "Slate"};
-    
-    int i = 0, j = 0;
-    for(i = 0; i < 5; i++) {
-        for(j = 0; j < 5; j++) {
-            testprintOnConsole(i * 5 + j, majorColor[i], minorColor[j]);
-        }
-    }
-    return i*j;
-}
-
-void printOnConsole(int pairNumber , const char* majorColor , const char* minorColor)
+typedef struct 
 {
-    printf("%d \t| \t%s \t| \t%s\n", pairNumber , majorColor, minorColor);
-}
+    char* Maj_Color;
+    char* Min_color;
+}ColorPair_set;
 
-int printColorMap() {
-    const char* majorColor[] = {"White", "Red", "Black", "Yellow", "Violet"};
-    const char* minorColor[] = {"Blue", "Orange", "Green", "Brown", "Slate"};
-    int i = 0, j = 0;
-    for(i = 0; i < 5; i++) {
-        for(j = 0; j < 5; j++) {
-            printOnConsole(i * 5 + j, majorColor[i], minorColor[j]);
-        }
-    }
-    return i*j;
+int Get_Each_ColorPair_set(void);
+
+void printColorMap(int PairN,ColorPair_set ColorPair ) 
+{
+    printf("%d | %s | %s\n", PairN, ColorPair.Maj_Color, ColorPair.Min_color);
 }
 
 int main() {
+    int result;
+    result = Get_Each_ColorPair_set();
+    assert(result==25);
+    assert(result == N_MAJ_COLORS*N_MIN_COLORS);
     
-    #if (SW_ENVIRONMENT == SW_TEST_ENVIRONMENT)
-    int (*fp_printColorMap)(void) = &testprintColorMap;
-    #else
-    int (*fp_printColorMap)(void) = &printColorMap;
-    #endif
-    
-    int result = fp_printColorMap();
-    assert(result == 25);
-    printf("The %d-Pair Color code is printed succesfully\n",result);
-    printf("All is well (maybe!)\n");
+   printf("All is well (maybe!)\n");
     return 0;
+}
+
+int Get_Each_ColorPair_set(void)
+{
+    int i = 0,j=0;
+    const char* majorColor[] = {"White", "Red", "Black", "Yellow", "Violet"};
+    const char* minorColor[] = {"Blue", "Orange", "Green", "Brown", "Slate"};
+    
+    ColorPair_set ColorPair;
+
+
+    
+    for(i = 0; i < N_MAJ_COLORS; i++) {
+         for(j = 0; j < N_MIN_COLORS; j++) {
+            ColorPair.Maj_Color = (char*)majorColor[(i * 5 + j)/N_MAJ_COLORS];
+            ColorPair.Min_color = (char*)minorColor[j%N_MIN_COLORS];
+          printColorMap( (i * 5 + j),  ColorPair);  
+        }
+        
+    }
+
+    return i*j;
 }
